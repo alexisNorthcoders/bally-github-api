@@ -1,18 +1,34 @@
 import { Request, Response } from "express"
-import { fetchAllRepositories } from "../model/model"
+import { searchResult } from "../../types"
 
 
 export function getStatus(_req: Request, res: Response) {
     res.sendStatus(200)
 }
-export async function getRepositories(req: Request, res: Response) {
+
+export function getRepositoriesByName(req: Request, res: Response) {
     const { name } = req.query
+    const searchResults = res.locals.items
     if (typeof name === "string") {
-        const repositories = await fetchAllRepositories(name)
-        res.json({ repositories })
+        const filteredItems = searchResults.filter((item: searchResult) => item.name.includes(name))
+        res.json({ repositories: filteredItems })
+    }
+}
+export function getRepositoriesById(req: Request, res: Response) {
+    const searchResults = res.locals
+    if (searchResults.status === "404") {
+        res.json({})
     }
     else {
-        res.status(400).json({ message: "Bad request!" })
+        res.json(searchResults)
     }
-
 }
+
+export function getReadme (req: Request, res: Response)  {
+    const readme = res.locals.readme;
+    if (readme) {
+        res.json({ hasReadme: true, readme });
+    } else {
+        res.json({ hasReadme: false });
+    }
+};

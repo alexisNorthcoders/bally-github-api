@@ -28,5 +28,29 @@ describe("GET /repositories?name={searchQuery}", () => {
         const { body: { repositories } } = await request(app).get(`/repositories?name=${searchQuery}`);
         expect(repositories).toEqual([])
     });
+    test("400: status code. Server responds with error if search parameter is missing", async () => {
+
+        const { status } = await request(app).get(`/repositories`);
+        expect(status).toEqual(400)
+    });
+
 
 });
+describe("GET /repositorydetails?id={repositoryId}", () => {
+    test("200: status code. Server sends details of repository by given id", async () => {
+        const repositoryId = "1"
+        const { body: { id } } = await request(app).get(`/repositorydetails?id=${repositoryId}`);
+        expect(id).toEqual(1)
+
+    });
+    test("200: status code. Server sends empty object if repository doesn't exist", async () => {
+        const repositoryId = "2"
+        const { body } = await request(app).get(`/repositorydetails?id=${repositoryId}`);
+        expect(body).toEqual({})
+
+    });
+    test("400: status code. Server responds with error if search parameter is missing", async () => {
+        const { status } = await request(app).get(`/repositorydetails`);
+        expect(status).toEqual(400)
+    });
+})
