@@ -17,13 +17,12 @@ export function getRepositoriesByName(req: Request, res: Response) {
 export function getRepositoriesById(req: Request, res: Response) {
     const searchResults = res.locals
     if (searchResults.status === "404") {
-        res.json({})
+        res.status(404).json({message:"Repository not found!"})
     }
     else {
         res.json(searchResults)
     }
 }
-
 export function getReadme(req: Request, res: Response) {
     const readme = res.locals.readme;
     if (readme) {
