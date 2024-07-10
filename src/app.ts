@@ -1,7 +1,9 @@
 import express from "express"
+import { getRepositories, getStatus } from "./controller/controller"
 
 const app = express()
 
-app.get("/status", (_req, res) => res.sendStatus(200))
+app.get("/status", getStatus)
+app.get("/repositories", getRepositories)
 
 export default app
