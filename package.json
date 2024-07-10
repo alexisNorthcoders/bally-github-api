@@ -1,0 +1,31 @@
+{
+  "name": "bally-github-api",
+  "version": "1.0.0",
+  "description": "service for github API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/listen.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "github"
+  ],
+  "author": "Alexis",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.10",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
