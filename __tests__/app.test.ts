@@ -48,10 +48,10 @@ describe("GET /repositorydetails?id={repositoryId}", () => {
         expect(id).toEqual(1)
 
     });
-    test("200: status code. Server sends empty object if repository doesn't exist", async () => {
+    test("404: status code. Server sends not found error if repository doesn't exist", async () => {
         const repositoryId = "2"
-        const { body } = await request(app).get(`/repositorydetails?id=${repositoryId}`);
-        expect(body).toEqual({})
+        const { status } = await request(app).get(`/repositorydetails?id=${repositoryId}`);
+        expect(status).toEqual(404)
 
     });
     test("400: status code. Server responds with error if search parameter is missing", async () => {
@@ -68,12 +68,11 @@ describe("GET /repositoryreadme?id={repositoryId}", () => {
         expect(headers['content-disposition']).toBe('attachment; filename="README.md"');
 
     });
-    test("200: status code. Server sends empty object if readme not available", async () => {
+    test("404: status code. Server send not found error if repository not found", async () => {
         const repositoryId = "2"
-        const { body, status } = await request(app).get(`/repositoryreadme?id=${repositoryId}`)
+        const { status } = await request(app).get(`/repositoryreadme?id=${repositoryId}`)
 
-        expect(status).toBe(200);
-        expect(body).toBe({});
+        expect(status).toBe(404);
 
     });
 
