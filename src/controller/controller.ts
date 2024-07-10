@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { searchResult } from "../../types"
-
+import { Buffer } from 'buffer';
 
 export function getStatus(_req: Request, res: Response) {
     res.sendStatus(200)
@@ -24,11 +24,15 @@ export function getRepositoriesById(req: Request, res: Response) {
     }
 }
 
-export function getReadme (req: Request, res: Response)  {
+export function getReadme(req: Request, res: Response) {
     const readme = res.locals.readme;
     if (readme) {
-        res.json({ hasReadme: true, readme });
+        const content = Buffer.from(readme.content, readme.encoding).toString('utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename="README.md"');
+        res.setHeader('Content-Type', 'text/markdown');
+        res.send(content);
+
     } else {
-        res.json({ hasReadme: false });
+        res.json({});
     }
 };
