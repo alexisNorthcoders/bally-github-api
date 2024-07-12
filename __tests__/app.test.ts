@@ -8,6 +8,13 @@ describe("GET /status/", () => {
         const { status } = await request(app).get("/status");
         expect(status).toEqual(200);
     });
+    test("200: status code. Responds with isAuthenticated and username properties",async () => {
+        const { status,body:{isAuthenticated,username} } = await request(app).get("/status");
+        expect(status).toEqual(200)
+        expect(typeof isAuthenticated).toEqual("boolean")
+        expect(username).toBeDefined()
+    });
+
 });
 describe("GET /repositories?name={searchQuery}", () => {
     test("200: status code. Server sends an object with repositories property and includes array with search results", async () => {

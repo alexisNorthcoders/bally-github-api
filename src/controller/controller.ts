@@ -3,7 +3,13 @@ import { searchResult } from "../../types"
 import { Buffer } from 'buffer';
 
 export function getStatus(_req: Request, res: Response) {
-    res.sendStatus(200)
+    const {login} = res.locals
+    const statusMessage: {isAuthenticated:boolean,username:string}={isAuthenticated:false,username:""}
+    if (login){
+        statusMessage.username = login
+        statusMessage.isAuthenticated = true
+    }
+    res.status(200).json(statusMessage)
 }
 
 export function getRepositoriesByName(req: Request, res: Response) {

@@ -76,19 +76,18 @@ export async function fetchReadmeByOwnerByRepo(req: Request, res: Response, next
 
 };
 
-export async function fetchCurrentUser(req: Request, res: Response) {
+export async function fetchCurrentUser(req: Request, res: Response, next: NextFunction) {
     const token = res.locals.token;
 
     const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {};
 
-        try {
-            const response = await fetch(`https://api.github.com/user`, { headers })
-            const {login} = await response.json()
-            
-            res.status(200).json({username:login})
-        }
-        catch (error) {
-            res.status(500).json({ message: "Error fetching from gitHub!" });
-        }
+    try {
+        const response = await fetch(`https://api.github.com/user`, { headers })
+        res.locals = await response.json()
+        next()
     }
+    catch (error) {
+        res.status(500).json({ message: "Error fetching from gitHub!" });
+    }
+}
 

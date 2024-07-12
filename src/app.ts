@@ -5,10 +5,9 @@ import { useGithubAuthToken } from "./middleware/authentication"
 
 const app = express()
 
-app.get("/status",useGithubAuthToken, getStatus)
+app.get("/status",useGithubAuthToken,fetchCurrentUser, getStatus)
 app.get("/repositories",useGithubAuthToken, fetchGitHub,getRepositoriesByName)
 app.get("/repositorydetails",useGithubAuthToken,fetchGitHub,getRepositoriesById)
 app.get("/repositoryreadme",useGithubAuthToken,fetchGitHub,fetchReadmeByOwnerByRepo,getReadme)
-app.get("/currentuser",useGithubAuthToken,fetchCurrentUser)
 
 export default app
