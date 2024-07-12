@@ -1,18 +1,20 @@
 import { NextFunction, Request, Response } from "express"
+import { Cache } from "../cache/Cache";
 
-const gitHubCache: { [key: string]: any } = {}
+const gitHubCache = new Cache()
 
 export async function fetchGitHub(req: Request, res: Response, next: NextFunction) {
     const { name, id } = req.query
     if (name && typeof name === "string") {
-        if (gitHubCache[`repositories:${name}`]) {
-            res.locals = gitHubCache[`repositories:${name}`];
+        const key = `repositories:${name}`
+        if (gitHubCache.has(key)) {
+            res.locals = gitHubCache.get(key);
             return next();
         }
         try {
             const response = await fetch(`https://api.github.com/search/repositories?q=${name}`)
             res.locals = await response.json()
-            gitHubCache[`repositories:${name}`] = res.locals;
+            gitHubCache.set(key, res.locals)
             next()
         }
         catch (error) {
@@ -21,14 +23,15 @@ export async function fetchGitHub(req: Request, res: Response, next: NextFunctio
 
     }
     else if (id && typeof id === "string") {
-        if (gitHubCache[`repository:${id}`]) {
-            res.locals = gitHubCache[`repository:${id}`];
+        const key = `repository:${id}`
+        if (gitHubCache.has(key)) {
+            res.locals = gitHubCache.get(key)
             return next();
         }
         try {
             const response = await fetch(`https://api.github.com/repositories/${id}`)
             res.locals = await response.json()
-            gitHubCache[`repository:${id}`] = res.locals
+            gitHubCache.set(key, res.locals)
             next()
         }
         catch (error) {
@@ -43,16 +46,17 @@ export async function fetchGitHub(req: Request, res: Response, next: NextFunctio
 export const fetchReadmeByOwnerByRepo = async (req: Request, res: Response, next: NextFunction) => {
     const owner = res.locals.owner?.login
     const repo = res.locals.name
+    const key = `readme:${owner}/${repo}`
     if (owner && repo) {
-        if (gitHubCache[`readme:${owner}/${repo}`]) {
-            res.locals.readme = gitHubCache[`readme:${owner}/${repo}`];
+        if (gitHubCache.has(key)) {
+            res.locals.readme = gitHubCache.get(key)
             return next();
         }
         try {
             const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`);
             const readme = await response.json()
             res.locals.readme = readme;
-            gitHubCache[`readme:${owner}/${repo}`] = readme;
+            gitHubCache.set(key, readme)
             next();
         }
         catch (error) {
