@@ -80,7 +80,6 @@ export async function fetchCurrentUser(_req: Request, res: Response, next: NextF
     const token = res.locals.token;
 
     const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {};
-
     try {
         const response = await fetch(`https://api.github.com/user`, { headers })
         res.locals = await response.json()

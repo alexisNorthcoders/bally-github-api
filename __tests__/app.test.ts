@@ -13,7 +13,6 @@ afterEach(() => {
 beforeEach(() => {
     fetchMock.resetMocks();
 });
-
 afterAll(() => {
     fetchMock.disableMocks();
 });
