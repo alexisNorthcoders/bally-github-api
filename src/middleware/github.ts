@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { Cache } from "../cache/Cache";
 
-const gitHubCache = new Cache()
+export const gitHubCache = new Cache()
 
 export async function fetchGitHub(req: Request, res: Response, next: NextFunction) {
     const { name, id } = req.query
@@ -47,7 +47,7 @@ export async function fetchGitHub(req: Request, res: Response, next: NextFunctio
     }
 }
 
-export async function fetchReadmeByOwnerByRepo(req: Request, res: Response, next: NextFunction) {
+export async function fetchReadmeByOwnerByRepo(_req: Request, res: Response, next: NextFunction) {
     const owner = res.locals.owner?.login
     const repo = res.locals.name
     const key = `readme:${owner}/${repo}`
@@ -76,7 +76,7 @@ export async function fetchReadmeByOwnerByRepo(req: Request, res: Response, next
 
 };
 
-export async function fetchCurrentUser(req: Request, res: Response, next: NextFunction) {
+export async function fetchCurrentUser(_req: Request, res: Response, next: NextFunction) {
     const token = res.locals.token;
 
     const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {};

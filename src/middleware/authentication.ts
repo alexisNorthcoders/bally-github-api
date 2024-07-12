@@ -5,7 +5,6 @@ dotenv.config();
 export function useGithubAuthToken(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;
     let token;
-
     if (authHeader && authHeader.startsWith("Bearer ")) {
         token = authHeader.split(" ")[1];
     } else {

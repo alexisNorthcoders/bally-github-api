@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { searchResult } from "../../types"
+import { GitHubRepository } from "../../types"
 import { Buffer } from 'buffer';
 
 export function getStatus(_req: Request, res: Response) {
@@ -16,7 +16,7 @@ export function getRepositoriesByName(req: Request, res: Response) {
     const { name } = req.query
     const searchResults = res.locals.items
     if (typeof name === "string") {
-        const filteredItems = searchResults.filter((item: searchResult) => item.name.includes(name))
+        const filteredItems = searchResults.filter((item: GitHubRepository) => item.name.includes(name))
         res.json({ repositories: filteredItems })
     }
 }
