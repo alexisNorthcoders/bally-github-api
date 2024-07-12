@@ -26,7 +26,7 @@ export function getRepositoriesByName(req: Request, res: Response) {
         res.json({ repositories: filteredItems })
     }
 }
-export function getRepositoriesById(req: Request, res: Response) {
+export function getRepositoriesById(_req: Request, res: Response) {
     const searchResults = res.locals
     if (searchResults.status === "404") {
         res.status(404).json({ message: "Repository not found!" })
@@ -35,7 +35,7 @@ export function getRepositoriesById(req: Request, res: Response) {
         res.json(searchResults)
     }
 }
-export function getReadme(req: Request, res: Response) {
+export function getReadme(_req: Request, res: Response) {
     const readme = res.locals.readme;
     if (readme) {
         const content = Buffer.from(readme.content, readme.encoding).toString('utf-8');

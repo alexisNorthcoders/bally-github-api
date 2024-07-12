@@ -31,9 +31,10 @@ describe("GET /repositories?name={searchQuery}", () => {
     test("200: status code. Server sends an object with repositories property and includes array with search results", async () => {
         const searchQuery = "random"
         const mockRepositories: GitHubRepository[] = [
-            { id: 1, name: "random-1", forks_count: 3, open_issues: 45 },
-            { id: 2, name: "random-2", forks_count: 2, open_issues: 23 },
+            { id: 1, name: "random-1", forks_count: 3, open_issues: 45, description: "unicorn app", html_url: "http://" },
+            { id: 2, name: "random-2", forks_count: 3, open_issues: 45, description: "random service app", html_url: "http://" },
         ];
+
         fetchMock.mockResponseOnce(JSON.stringify({ items: mockRepositories }));
 
         const { status, body: { repositories } } = await request(app).get(`/repositories?name=${searchQuery}`);
@@ -42,15 +43,15 @@ describe("GET /repositories?name={searchQuery}", () => {
         expect(repositories).toBeDefined()
         expect(repositories.length).toBe(2)
         repositories.forEach((repository: GitHubRepository) => {
-            expect(Object.keys(repository).length).toBe(4)
+            expect(Object.keys(repository).length).toBe(6)
         })
     });
     test("200: status code. Server should only return repositories with same name as the query", async () => {
         const searchQuery = "sameAsQuery"
         const mockRepositories: GitHubRepository[] = [
-            { id: 1, name: "sameAsQuery", forks_count: 3, open_issues: 45 },
-            { id: 2, name: "sameAsQuery", forks_count: 2, open_issues: 23 },
-            { id: 3, name: "notAsQuery", forks_count: 2, open_issues: 23 },
+            { id: 1, name: "sameAsQuery", forks_count: 3, open_issues: 45, description: "unicorn app", html_url: "http://" },
+            { id: 2, name: "sameAsQuery", forks_count: 2, open_issues: 23, description: "unicorn app", html_url: "http://" },
+            { id: 3, name: "notAsQuery", forks_count: 2, open_issues: 23, description: "unicorn app", html_url: "http://" },
         ];
         fetchMock.mockResponseOnce(JSON.stringify({ items: mockRepositories }));
         const { status, body: { repositories } } = await request(app).get(`/repositories?name=${searchQuery}`);
@@ -87,11 +88,13 @@ describe("GET /repositorydetails?id={repositoryId}", () => {
         const repositoryId = "1"
         const mockRepository: GitHubRepository =
         {
-            id: 1, name: "random-1", forks_count: 3, open_issues: 45,
+            id: 1, name: "random-1", forks_count: 3, open_issues: 45, description: "unicorn app", html_url: "http://",
             owner: {
                 login: "johny"
             }
         }
+
+
 
         fetchMock.mockResponseOnce(JSON.stringify(mockRepository));
         const { body } = await request(app).get(`/repositorydetails?id=${repositoryId}`);
@@ -122,7 +125,7 @@ describe("GET /repositoryreadme?id={repositoryId}", () => {
         const repositoryId = "1"
         const mockRepository: GitHubRepository =
         {
-            id: 1, name: "random-1", forks_count: 3, open_issues: 45,
+            id: 1, name: "random-1", forks_count: 3, open_issues: 45, description: "unicorn app", html_url: "http://",
             owner: {
                 login: "johny"
             }
@@ -168,7 +171,7 @@ describe("GET /currentuser", () => {
     })
     test("404: status code. Server returns error if token not found", async () => {
 
-        const mockToken = {  }
+        const mockToken = {}
         fetchMock.mockResponseOnce(JSON.stringify(mockToken));
 
         const { status } = await request(app).get("/currentuser");
