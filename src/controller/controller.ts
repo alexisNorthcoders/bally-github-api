@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { GitHubRepository } from "../../types"
 import { Buffer } from 'buffer';
+import { filterRepositoriesByName } from "../utils/utils";
 
 export function getStatus(_req: Request, res: Response) {
 
@@ -8,14 +9,11 @@ export function getStatus(_req: Request, res: Response) {
 }
 export function getUser(_req: Request, res: Response) {
     const { login } = res.locals
-    const statusMessage: { isAuthenticated: boolean, username: string } = { isAuthenticated: false, username: "" }
     if (login) {
-        statusMessage.username = login
-        statusMessage.isAuthenticated = true
         res.status(200).json({ username: login })
     }
-    else{
-        res.status(404).json({message:"Access token not found!"})
+    else {
+        res.status(404).json({ message: "Access token not found!" })
     }
 }
 
@@ -23,7 +21,8 @@ export function getRepositoriesByName(req: Request, res: Response) {
     const { name } = req.query
     const searchResults = res.locals.items
     if (typeof name === "string") {
-        const filteredItems = searchResults.filter((item: GitHubRepository) => item.name.includes(name))
+        const filteredItems = filterRepositoriesByName(searchResults, name)
+
         res.json({ repositories: filteredItems })
     }
 }
