@@ -10,7 +10,7 @@
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/alexisNorthcoers/bally-github-api.git
+   git clone https://github.com/alexisNorthcoders/bally-github-api.git
    cd bally-github-api
 2. Install dependencies:
    ```sh
@@ -39,8 +39,8 @@ Manual testing :
 ```
 curl http://localhost:3600/status
 curl http://localhost:3600/repositories?name=bally-github-api
-curl http://localhost:3600/repositordetails?id=bally=github-api
-curl http://localhost:3600/repositoryreadme?id=bally=github-api
+curl http://localhost:3600/repositorydetails?id=828001452
+curl http://localhost:3600/repositoryreadme?id=828001452
 ```
 
 ## Cache
