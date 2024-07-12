@@ -3,13 +3,20 @@ import { GitHubRepository } from "../../types"
 import { Buffer } from 'buffer';
 
 export function getStatus(_req: Request, res: Response) {
-    const {login} = res.locals
-    const statusMessage: {isAuthenticated:boolean,username:string}={isAuthenticated:false,username:""}
-    if (login){
+
+    res.sendStatus(200)
+}
+export function getUser(_req: Request, res: Response) {
+    const { login } = res.locals
+    const statusMessage: { isAuthenticated: boolean, username: string } = { isAuthenticated: false, username: "" }
+    if (login) {
         statusMessage.username = login
         statusMessage.isAuthenticated = true
+        res.status(200).json({ username: login })
     }
-    res.status(200).json(statusMessage)
+    else{
+        res.status(404).json({message:"Access token not found!"})
+    }
 }
 
 export function getRepositoriesByName(req: Request, res: Response) {
@@ -23,7 +30,7 @@ export function getRepositoriesByName(req: Request, res: Response) {
 export function getRepositoriesById(req: Request, res: Response) {
     const searchResults = res.locals
     if (searchResults.status === "404") {
-        res.status(404).json({message:"Repository not found!"})
+        res.status(404).json({ message: "Repository not found!" })
     }
     else {
         res.json(searchResults)

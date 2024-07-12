@@ -1,11 +1,12 @@
 import express from "express"
-import {  getRepositoriesById, getRepositoriesByName, getStatus,getReadme } from "./controller/controller"
+import {  getRepositoriesById, getRepositoriesByName, getStatus,getReadme,getUser } from "./controller/controller"
 import { fetchReadmeByOwnerByRepo, fetchGitHub,fetchCurrentUser } from "./middleware/github"
 import { useGithubAuthToken } from "./middleware/authentication"
 
 const app = express()
 
-app.get("/status",useGithubAuthToken,fetchCurrentUser, getStatus)
+app.get("/status",getStatus)
+app.get("/currentuser",useGithubAuthToken,fetchCurrentUser,getUser)
 app.get("/repositories",useGithubAuthToken, fetchGitHub,getRepositoriesByName)
 app.get("/repositorydetails",useGithubAuthToken,fetchGitHub,getRepositoriesById)
 app.get("/repositoryreadme",useGithubAuthToken,fetchGitHub,fetchReadmeByOwnerByRepo,getReadme)

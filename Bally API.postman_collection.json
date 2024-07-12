@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "8977f355-4c26-47cc-b6ef-97a96defbd08",
+		"name": "Bally API",
+		"description": "Service using GitHub API to query GitHub repositories by name.  \nGet repository details by id and retrieve the README if available.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36954749"
+	},
+	"item": [
+		{
+			"name": "Check server health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3600/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3600",
+					"path": [
+						"status"
+					]
+				},
+				"description": "Checks if the server is running."
+			},
+			"response": []
+		},
+		{
+			"name": "Search repositories by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3600/repositories?name=midi-chat-sockets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3600",
+					"path": [
+						"repositories"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "midi-chat-sockets"
+						}
+					]
+				},
+				"description": "Server returns search results by repository name."
+			},
+			"response": []
+		},
+		{
+			"name": "Get repository details by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3600/repositorydetails?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3600",
+					"path": [
+						"repositorydetails"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Returns resuls from repository by given Id."
+			},
+			"response": []
+		},
+		{
+			"name": "Get README by repository Id if it exists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3600/repositoryreadme?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3600",
+					"path": [
+						"repositoryreadme"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Returns README file is available for repository by given Id."
+			},
+			"response": []
+		},
+		{
+			"name": "Get current User if Authenticated",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3600/currentuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3600",
+					"path": [
+						"currentuser"
+					]
+				},
+				"description": "Returns username if using valid access token."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

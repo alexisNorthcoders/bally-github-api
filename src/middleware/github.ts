@@ -84,7 +84,12 @@ export async function fetchCurrentUser(_req: Request, res: Response, next: NextF
     try {
         const response = await fetch(`https://api.github.com/user`, { headers })
         res.locals = await response.json()
-        next()
+        if (res.locals.status === "401") {
+            res.status(400).json({ message: "Invalid token!" })
+        }
+        else {
+            next()
+        }
     }
     catch (error) {
         res.status(500).json({ message: "Error fetching from gitHub!" });

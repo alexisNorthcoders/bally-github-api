@@ -22,19 +22,8 @@ describe("GET /status/", () => {
 
     test("200: status code. Indicates that server is running", async () => {
 
-        fetchMock.mockResponseOnce(JSON.stringify(""));
-
         const { status } = await request(app).get("/status");
         expect(status).toEqual(200);
-    });
-    test("200: status code. Responds with isAuthenticated and username properties", async () => {
-        const mockResponse = { body: { isAuthenticated: false, username: "" } }
-        fetchMock.mockResponseOnce(JSON.stringify(mockResponse));
-
-        const { status, body: { isAuthenticated, username } } = await request(app).get("/status");
-        expect(status).toEqual(200)
-        expect(isAuthenticated).toEqual(false)
-        expect(username).toEqual("")
     });
 
 });
@@ -131,8 +120,6 @@ describe("GET /repositorydetails?id={repositoryId}", () => {
 describe("GET /repositoryreadme?id={repositoryId}", () => {
 
     test("200: status code. Server sends readme if available", async () => {
-
-
         const repositoryId = "1"
         const mockRepository: GitHubRepository =
         {
@@ -151,7 +138,6 @@ describe("GET /repositoryreadme?id={repositoryId}", () => {
         );
 
         const { headers, status, body } = await request(app).get(`/repositoryreadme?id=${repositoryId}`)
-
         expect(status).toBe(200);
         expect(headers['content-disposition']).toBe('attachment; filename="README.md"');
 
@@ -164,12 +150,30 @@ describe("GET /repositoryreadme?id={repositoryId}", () => {
             "documentation_url": "https://docs.github.com/rest/repos/repos#get-a-repository",
             "status": "404"
         }
-
         fetchMock.mockResponseOnce(JSON.stringify(mockResponse));
         const { status } = await request(app).get(`/repositoryreadme?id=${repositoryId}`)
-
         expect(status).toBe(404);
 
     });
 
+})
+describe("GET /currentuser", () => {
+    test("200: status code. Server returns username if using Access Token", async () => {
+
+        const mockToken = { login: "johny" }
+        fetchMock.mockResponseOnce(JSON.stringify(mockToken));
+
+        const { status, body: { username } } = await request(app).get("/currentuser");
+        expect(status).toEqual(200)
+        expect(username).toEqual("johny")
+    })
+    test("404: status code. Server returns error if token not found", async () => {
+
+        const mockToken = {  }
+        fetchMock.mockResponseOnce(JSON.stringify(mockToken));
+
+        const { status } = await request(app).get("/currentuser");
+        expect(status).toEqual(404)
+
+    })
 })
