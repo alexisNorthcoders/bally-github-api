@@ -16,4 +16,7 @@ export class Cache {
     has(key: string): boolean {
         return this.cache.hasOwnProperty(key);
     }
+    clear(){
+        this.cache = {}
+    }
 }
