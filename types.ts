@@ -6,7 +6,7 @@ export interface GitHubRepository {
     forks_count: number,
     open_issues: number,
 
-    owner?: {
+    owner: {
         login: string
     }
 }

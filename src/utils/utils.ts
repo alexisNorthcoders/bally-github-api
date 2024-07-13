@@ -6,6 +6,7 @@ export function extractRelevantInfo(repository: GitHubRepository) {
     return {
         id: repository.id,
         name: repository.name,
+        owner:repository.owner.login,
         description: repository.description,
         html_url: repository.html_url,
         open_issues: repository.open_issues,

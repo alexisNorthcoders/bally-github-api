@@ -31,8 +31,8 @@ describe("GET /repositories?name={searchQuery}", () => {
     test("200: status code. Server sends an object with repositories property and includes array with search results", async () => {
         const searchQuery = "random"
         const mockRepositories: GitHubRepository[] = [
-            { id: 1, name: "random-1", forks_count: 3, open_issues: 45, description: "unicorn app", html_url: "http://" },
-            { id: 2, name: "random-2", forks_count: 3, open_issues: 45, description: "random service app", html_url: "http://" },
+            { id: 1, name: "random-1", forks_count: 3, open_issues: 45, description: "unicorn app", html_url: "http://",owner:{login:"jonhy"} },
+            { id: 2, name: "random-2", forks_count: 3, open_issues: 45, description: "random service app", html_url: "http://",owner:{login:"jonhy"}  },
         ];
 
         fetchMock.mockResponseOnce(JSON.stringify({ items: mockRepositories }));
@@ -43,15 +43,15 @@ describe("GET /repositories?name={searchQuery}", () => {
         expect(repositories).toBeDefined()
         expect(repositories.length).toBe(2)
         repositories.forEach((repository: GitHubRepository) => {
-            expect(Object.keys(repository).length).toBe(6)
+            expect(Object.keys(repository).length).toBe(7)
         })
     });
     test("200: status code. Server should only return repositories with same name as the query", async () => {
         const searchQuery = "sameAsQuery"
         const mockRepositories: GitHubRepository[] = [
-            { id: 1, name: "sameAsQuery", forks_count: 3, open_issues: 45, description: "unicorn app", html_url: "http://" },
-            { id: 2, name: "sameAsQuery", forks_count: 2, open_issues: 23, description: "unicorn app", html_url: "http://" },
-            { id: 3, name: "notAsQuery", forks_count: 2, open_issues: 23, description: "unicorn app", html_url: "http://" },
+            { id: 1, name: "sameAsQuery", forks_count: 3, open_issues: 45, description: "unicorn app", html_url: "http://",owner:{login:"jonhy"}  },
+            { id: 2, name: "sameAsQuery", forks_count: 2, open_issues: 23, description: "unicorn app", html_url: "http://",owner:{login:"jonhy"}  },
+            { id: 3, name: "notAsQuery", forks_count: 2, open_issues: 23, description: "unicorn app", html_url: "http://",owner:{login:"jonhy"}  },
         ];
         fetchMock.mockResponseOnce(JSON.stringify({ items: mockRepositories }));
         const { status, body: { repositories } } = await request(app).get(`/repositories?name=${searchQuery}`);
