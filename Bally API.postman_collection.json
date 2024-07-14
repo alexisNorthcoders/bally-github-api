@@ -25,7 +25,61 @@
 				},
 				"description": "Checks if the server is running."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Check server health",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3600/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3600",
+							"path": [
+								"status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Jul 2024 22:29:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "OK"
+				}
+			]
 		},
 		{
 			"name": "Search repositories by name",
@@ -33,7 +87,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3600/repositories?name=midi-chat-sockets",
+					"raw": "http://localhost:3600/repositories?{{name}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -45,13 +99,73 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "midi-chat-sockets"
+							"value": "{{name}}"
 						}
 					]
 				},
 				"description": "Server returns search results by repository name."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Search repositories by name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3600/repositories?name=midi-chat-sockets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3600",
+							"path": [
+								"repositories"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "midi-chat-sockets"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "260"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"104-PkuI6lHtOpzW1fvUmycLOTY85ng\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Jul 2024 22:29:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"repositories\": [\n        {\n            \"id\": 785434859,\n            \"name\": \"midi-chat-sockets\",\n            \"owner\": \"alexisNorthcoders\",\n            \"description\": \"Project using websockets for a chat and MIDI keyboard\",\n            \"html_url\": \"https://github.com/alexisNorthcoders/midi-chat-sockets\",\n            \"open_issues\": 0,\n            \"forks_count\": 0\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Get repository details by Id",
@@ -59,7 +173,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3600/repositorydetails?id=1",
+					"raw": "http://localhost:3600/repositorydetails?id={{id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -71,13 +185,73 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "{{id}}"
 						}
 					]
 				},
 				"description": "Returns resuls from repository by given Id."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get repository details by Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3600/repositorydetails?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3600",
+							"path": [
+								"repositorydetails"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4927"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"133f-rFvZbkW6GGqooDD4Dp/2CdUpGdk\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Jul 2024 22:30:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"node_id\": \"MDEwOlJlcG9zaXRvcnkx\",\n    \"name\": \"grit\",\n    \"full_name\": \"mojombo/grit\",\n    \"private\": false,\n    \"owner\": {\n        \"login\": \"mojombo\",\n        \"id\": 1,\n        \"node_id\": \"MDQ6VXNlcjE=\",\n        \"avatar_url\": \"https://avatars.githubusercontent.com/u/1?v=4\",\n        \"gravatar_id\": \"\",\n        \"url\": \"https://api.github.com/users/mojombo\",\n        \"html_url\": \"https://github.com/mojombo\",\n        \"followers_url\": \"https://api.github.com/users/mojombo/followers\",\n        \"following_url\": \"https://api.github.com/users/mojombo/following{/other_user}\",\n        \"gists_url\": \"https://api.github.com/users/mojombo/gists{/gist_id}\",\n        \"starred_url\": \"https://api.github.com/users/mojombo/starred{/owner}{/repo}\",\n        \"subscriptions_url\": \"https://api.github.com/users/mojombo/subscriptions\",\n        \"organizations_url\": \"https://api.github.com/users/mojombo/orgs\",\n        \"repos_url\": \"https://api.github.com/users/mojombo/repos\",\n        \"events_url\": \"https://api.github.com/users/mojombo/events{/privacy}\",\n        \"received_events_url\": \"https://api.github.com/users/mojombo/received_events\",\n        \"type\": \"User\",\n        \"site_admin\": false\n    },\n    \"html_url\": \"https://github.com/mojombo/grit\",\n    \"description\": \"**Grit is no longer maintained. Check out libgit2/rugged.** Grit gives you object oriented read/write access to Git repositories via Ruby.\",\n    \"fork\": false,\n    \"url\": \"https://api.github.com/repos/mojombo/grit\",\n    \"forks_url\": \"https://api.github.com/repos/mojombo/grit/forks\",\n    \"keys_url\": \"https://api.github.com/repos/mojombo/grit/keys{/key_id}\",\n    \"collaborators_url\": \"https://api.github.com/repos/mojombo/grit/collaborators{/collaborator}\",\n    \"teams_url\": \"https://api.github.com/repos/mojombo/grit/teams\",\n    \"hooks_url\": \"https://api.github.com/repos/mojombo/grit/hooks\",\n    \"issue_events_url\": \"https://api.github.com/repos/mojombo/grit/issues/events{/number}\",\n    \"events_url\": \"https://api.github.com/repos/mojombo/grit/events\",\n    \"assignees_url\": \"https://api.github.com/repos/mojombo/grit/assignees{/user}\",\n    \"branches_url\": \"https://api.github.com/repos/mojombo/grit/branches{/branch}\",\n    \"tags_url\": \"https://api.github.com/repos/mojombo/grit/tags\",\n    \"blobs_url\": \"https://api.github.com/repos/mojombo/grit/git/blobs{/sha}\",\n    \"git_tags_url\": \"https://api.github.com/repos/mojombo/grit/git/tags{/sha}\",\n    \"git_refs_url\": \"https://api.github.com/repos/mojombo/grit/git/refs{/sha}\",\n    \"trees_url\": \"https://api.github.com/repos/mojombo/grit/git/trees{/sha}\",\n    \"statuses_url\": \"https://api.github.com/repos/mojombo/grit/statuses/{sha}\",\n    \"languages_url\": \"https://api.github.com/repos/mojombo/grit/languages\",\n    \"stargazers_url\": \"https://api.github.com/repos/mojombo/grit/stargazers\",\n    \"contributors_url\": \"https://api.github.com/repos/mojombo/grit/contributors\",\n    \"subscribers_url\": \"https://api.github.com/repos/mojombo/grit/subscribers\",\n    \"subscription_url\": \"https://api.github.com/repos/mojombo/grit/subscription\",\n    \"commits_url\": \"https://api.github.com/repos/mojombo/grit/commits{/sha}\",\n    \"git_commits_url\": \"https://api.github.com/repos/mojombo/grit/git/commits{/sha}\",\n    \"comments_url\": \"https://api.github.com/repos/mojombo/grit/comments{/number}\",\n    \"issue_comment_url\": \"https://api.github.com/repos/mojombo/grit/issues/comments{/number}\",\n    \"contents_url\": \"https://api.github.com/repos/mojombo/grit/contents/{+path}\",\n    \"compare_url\": \"https://api.github.com/repos/mojombo/grit/compare/{base}...{head}\",\n    \"merges_url\": \"https://api.github.com/repos/mojombo/grit/merges\",\n    \"archive_url\": \"https://api.github.com/repos/mojombo/grit/{archive_format}{/ref}\",\n    \"downloads_url\": \"https://api.github.com/repos/mojombo/grit/downloads\",\n    \"issues_url\": \"https://api.github.com/repos/mojombo/grit/issues{/number}\",\n    \"pulls_url\": \"https://api.github.com/repos/mojombo/grit/pulls{/number}\",\n    \"milestones_url\": \"https://api.github.com/repos/mojombo/grit/milestones{/number}\",\n    \"notifications_url\": \"https://api.github.com/repos/mojombo/grit/notifications{?since,all,participating}\",\n    \"labels_url\": \"https://api.github.com/repos/mojombo/grit/labels{/name}\",\n    \"releases_url\": \"https://api.github.com/repos/mojombo/grit/releases{/id}\",\n    \"deployments_url\": \"https://api.github.com/repos/mojombo/grit/deployments\",\n    \"created_at\": \"2007-10-29T14:37:16Z\",\n    \"updated_at\": \"2024-07-10T15:59:01Z\",\n    \"pushed_at\": \"2023-08-17T19:15:41Z\",\n    \"git_url\": \"git://github.com/mojombo/grit.git\",\n    \"ssh_url\": \"git@github.com:mojombo/grit.git\",\n    \"clone_url\": \"https://github.com/mojombo/grit.git\",\n    \"svn_url\": \"https://github.com/mojombo/grit\",\n    \"homepage\": \"http://grit.rubyforge.org/\",\n    \"size\": 7954,\n    \"stargazers_count\": 1968,\n    \"watchers_count\": 1968,\n    \"language\": \"Ruby\",\n    \"has_issues\": true,\n    \"has_projects\": true,\n    \"has_downloads\": true,\n    \"has_wiki\": true,\n    \"has_pages\": false,\n    \"has_discussions\": false,\n    \"forks_count\": 514,\n    \"mirror_url\": null,\n    \"archived\": false,\n    \"disabled\": false,\n    \"open_issues_count\": 43,\n    \"license\": {\n        \"key\": \"mit\",\n        \"name\": \"MIT License\",\n        \"spdx_id\": \"MIT\",\n        \"url\": \"https://api.github.com/licenses/mit\",\n        \"node_id\": \"MDc6TGljZW5zZTEz\"\n    },\n    \"allow_forking\": true,\n    \"is_template\": false,\n    \"web_commit_signoff_required\": false,\n    \"topics\": [],\n    \"visibility\": \"public\",\n    \"forks\": 514,\n    \"open_issues\": 43,\n    \"watchers\": 1968,\n    \"default_branch\": \"master\",\n    \"temp_clone_token\": null,\n    \"network_count\": 514,\n    \"subscribers_count\": 71\n}"
+				}
+			]
 		},
 		{
 			"name": "Get README by repository Id if it exists",
@@ -103,7 +277,71 @@
 				},
 				"description": "Returns README file is available for repository by given Id."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get README by repository Id if it exists",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3600/repositoryreadme?id={{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3600",
+							"path": [
+								"repositoryreadme"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Disposition",
+							"value": "attachment; filename=\"README.md\""
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/markdown; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1145"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"479-dbChAzDpgfU6FKWCys5tacGk9G8\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Jul 2024 22:30:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "# Children's MIDI Keyboard Project\n\n## Introduction\n\nWelcome to the Children's MIDI Keyboard Project repository! This educational tool combines modern web technologies to create an interactive musical experience for children. It uses HTML, Tailwind CSS for styling, WebSockets for real-time communication, the OpenAI API for evaluation, and the JavaScript Web Audio API for sound synthesis. With this MIDI keyboard, kids can enjoy playing melodies, learning songs like \"Twinkle Twinkle Little Star\" and \"Old MacDonald Had a Farm,\" and even receive feedback on their performance through OpenAI's assessment capabilities.\n\n## Features\n\n- Interactive keyboard interface designed with children in mind\n- Use your mouse, keyboard or MIDI keyboard to interact with the keys.\n- Preloaded melodies for instant play: \"Twinkle Twinkle,\" \"Old McDonald,\" and more\n- Real-time performance evaluation using OpenAI\n- Train mode that teaches song sequences and validates user input\n- Responsive design powered by Tailwind CSS for an optimal experience across devices\n- WebSocket-based communication for a seamless user interaction\n\n![alt text](midikeyboard.gif)"
+				}
+			]
 		},
 		{
 			"name": "Get current User if Authenticated",
@@ -126,7 +364,61 @@
 				},
 				"description": "Returns username if using valid access token."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get current User if Authenticated",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3600/currentuser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3600",
+							"path": [
+								"currentuser"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"20-2TH++fXEHeAWGabsRFXhuPPFa9U\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Jul 2024 22:31:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"alexisNorthcoders\"\n}"
+				}
+			]
 		}
 	],
 	"auth": {
@@ -152,6 +444,16 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "name",
+			"value": "{{name}}"
+		},
+		{
+			"key": "id",
+			"value": "{{id}}"
 		}
 	]
 }
