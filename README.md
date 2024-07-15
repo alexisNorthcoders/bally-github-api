@@ -21,6 +21,7 @@
    GITHUB_AUTH_TOKEN= <this is optional and not recommended>
    ```
     Note: Using the authentication token will significantly increase the response time as with every request the GitHub API is cheking your permissions. You can also add the Access Token in the Bearer manually when doing a request.
+    With the access token you will be able to access more information about your own repositories and have a higher rate limit of GitHub API.
 
 4. Start the server:
    ```sh
